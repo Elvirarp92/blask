@@ -109,15 +109,7 @@ class BlaskApp:
         else:
             title = entry.title
 
-        return render_template(
-            template,
-            title=title,
-            content=content,
-            date=date,
-            tags=tags,
-            category=category,
-            author=author,
-        )
+        return render_template(template,title=title,content=content,date=date,tags=tags,category=category,author=author,)
 
     def _get_subpage(self, subpath, filename):
         subfilename = safe_join(subpath, filename)
@@ -170,11 +162,7 @@ class BlaskApp:
         """
         postlist = self.blogrenderer.list_posts(category=category)
         content = self.blogrenderer.generatetagpage(postlist)
-        return render_template(
-            self.settings["defaultLayout"],
-            title=self.settings["title"],
-            content=content,
-        )
+        return render_template(self.settings["defaultLayout"],title=self.settings["title"],content=content,)
 
     def _getauthor(self, author):
         """
@@ -184,11 +172,7 @@ class BlaskApp:
         """
         postlist = self.blogrenderer.list_posts(author=author)
         content = self.blogrenderer.generatetagpage(postlist)
-        return render_template(
-            self.settings["defaultLayout"],
-            title=self.settings["title"],
-            content=content,
-        )
+        return render_template(self.settings["defaultLayout"],title=self.settings["title"],content=content,)
 
     def _handle_http_errors(self, error_message):
         """

@@ -100,15 +100,7 @@ class BlogRenderer:
         return entry
 
     # pylint: disable=dangerous-default-value
-    def list_posts(
-        self,
-        tags=None,
-        exclusions=[INDEX, "404.md"],
-        search="",
-        category="",
-        author="",
-        orderbydate=True,
-    ):
+    def list_posts(self,tags=None,exclusions=[INDEX, "404.md"],search="",category="",author="",orderbydate=True,):
         """
         Search a list of Posts returning a list of BlogEntry ordered By Date.
         :param tags: list of tags for searching.
@@ -169,9 +161,7 @@ class BlogRenderer:
         :param postlist: list with all the posts for the sitemapxml.
         :return: return the xml output for the Sitemap.xml file.
         """
-        root = ET.Element(
-            "urlset", attrib={"xmlns": "http://www.sitemaps.org/schemas/sitemap/0.9"}
-        )
+        root = ET.Element("urlset", attrib={"xmlns": "http://www.sitemaps.org/schemas/sitemap/0.9"})
         rpostlist = self._listdirectoriesrecursive(postlist)
         rpostlist.remove(INDEX)
         rpostlist = list(map(lambda l: path.splitext(l)[0], rpostlist))
