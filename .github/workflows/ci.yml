@@ -69,14 +69,10 @@ jobs:
       - name: Install Black
         run: pip install black
 
-      - name: Check if changes are Black-compliant
-        run: black --check .
-
-      - name: Auto-format with Black and commit format changes
-        if: failure()
+      - name: Auto-format with Black and commit format changes only if there are changes
         run: |
           black .
           git config user.name 'autoblack'
           git config user.email '<autoblack@github.com>'
-          git commit -am "fixup: Format Python code with Black"
+          git diff --quiet HEAD || git commit -am "fixup: Format Python code with Black"
           git push
