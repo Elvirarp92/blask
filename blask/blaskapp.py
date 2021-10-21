@@ -42,7 +42,11 @@ class BlaskApp:
         """
         self.settings = BlaskSettings(**kwargs)
         self.blogrenderer = BlogRenderer(self.settings["postDir"])
-        self.app = Flask(__name__, template_folder=self.settings["templateDir"], static_folder=self.settings["staticDir"],)
+        self.app = Flask(
+            __name__,
+            template_folder=self.settings["templateDir"],
+            static_folder=self.settings["staticDir"],
+        )
 
         self.csrf = CSRFProtect()
         self.csrf.init_app(self.app)
@@ -59,7 +63,9 @@ class BlaskApp:
         )
         self.app.add_url_rule("/tag/<tag>", view_func=self._gettag, methods=["GET"])
         self.app.add_url_rule("/search", view_func=self.searchpages, methods=["POST"])
-        self.app.add_url_rule("/category/<category>", view_func=self._getcategory, methods=["GET"])
+        self.app.add_url_rule(
+            "/category/<category>", view_func=self._getcategory, methods=["GET"]
+        )
         self.app.add_url_rule(
             "/author/<author>", view_func=self._getauthor, methods=["GET"]
         )
@@ -76,7 +82,9 @@ class BlaskApp:
         template = entry.template
         if template is None:
             template = self.settings["defaultLayout"]
-        return render_template(template, title=self.settings["title"], content=entry.content)
+        return render_template(
+            template, title=self.settings["title"], content=entry.content
+        )
 
     def _getpage(self, filename):
         """
@@ -101,7 +109,15 @@ class BlaskApp:
         else:
             title = entry.title
 
-        return render_template(template,title=title,content=content,date=date,tags=tags,category=category,author=author,)
+        return render_template(
+            template,
+            title=title,
+            content=content,
+            date=date,
+            tags=tags,
+            category=category,
+            author=author,
+        )
 
     def _get_subpage(self, subpath, filename):
         subfilename = safe_join(subpath, filename)
