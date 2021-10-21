@@ -5,6 +5,7 @@ on:
       - master
       - githubactions
       - develop
+      - test/autoblack
 
 env: 
   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
